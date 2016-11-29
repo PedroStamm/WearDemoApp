@@ -27,6 +27,8 @@ public class WearActivity extends Activity{
     private TextView mTextView;
     private GoogleApiClient mGoogleApiClient;
     private int notifId;
+    private Date date;
+    DateFormat timeFormat = new SimpleDateFormat("yyy/MM/dd HH:mm:ss");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class WearActivity extends Activity{
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
                 mTextView = (TextView) stub.findViewById(R.id.text);
+                mTextView.setText(timeFormat.format(date));
             }
         });
     }
@@ -44,18 +47,15 @@ public class WearActivity extends Activity{
 
 
     @Override
-    public void onPostResume(){
+    public void onResume(){
         super.onResume();
         Intent intent = this.getIntent();
         Bundle extras = intent.getExtras();
         if(extras!=null){
             notifId = (int) extras.get("notifId");
             long cur = (long) extras.get("date");
-            DateFormat timeFormat = new SimpleDateFormat("yyy/MM/dd HH:mm:ss");
-            Date date = new Date();
+            date = new Date();
             date.setTime(cur);
-            TextView text = (TextView) findViewById(R.id.text);
-            text.setText(timeFormat.format(date));
         }
         else{
             Log.d("Intent","Wrong intent");

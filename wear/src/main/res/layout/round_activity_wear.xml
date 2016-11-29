@@ -13,8 +13,4 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="@string/hello_round" />
-    <android.support.wearable.view.CircularButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="resolveNodes"/>
 </RelativeLayout>
